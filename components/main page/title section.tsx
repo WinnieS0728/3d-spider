@@ -1,6 +1,6 @@
 "use client";
-import React, { useRef } from "react";
-import ClipText from "./clip text";
+import { Center, ContactShadows } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
 import {
   motion,
   useMotionTemplate,
@@ -8,9 +8,10 @@ import {
   useTransform,
 } from "framer-motion";
 import Image from "next/image";
-import { Canvas } from "@react-three/fiber";
+import { useRef } from "react";
 import SpiderLogo from "../3d models/spider logo";
-import { Center, ContactShadows } from "@react-three/drei";
+import ClipText from "./clip text";
+import Cards from "./3d cards";
 
 export default function TitleSection() {
   const container = useRef<HTMLElement>(null);
@@ -27,21 +28,18 @@ export default function TitleSection() {
 
   return (
     <>
-      <section className='bg-black h-[300dvh] overflow-clip'>
-        <section className='h-screen sticky top-0'>
-          <h1 className='text-white uppercase text-[15rem] h-full flex flex-col justify-center items-start gap-10'>
-            <ClipText text='spider' />
-            <ClipText
-              text='verse'
-              className='self-end'
-            />
+      <section className="h-[300dvh] overflow-clip bg-black">
+        <section className="sticky top-0 h-screen">
+          <h1 className="flex h-full flex-col items-start justify-center gap-10 text-[15rem] uppercase text-white">
+            <ClipText text="spider" />
+            <ClipText text="verse" className="self-end" />
           </h1>
         </section>
-        <section className='h-screen sticky top-0 flex justify-center items-center'>
+        <section className="sticky top-0 flex h-screen items-center justify-center">
           <Image
-            className=''
+            className=""
             src={"/images/spider logo.png"}
-            alt='spider logo'
+            alt="spider logo"
             width={500}
             height={500}
             priority
@@ -49,15 +47,15 @@ export default function TitleSection() {
         </section>
         <motion.section
           ref={container}
-          className='h-screen sticky top-0 origin-center'
+          className="sticky top-0 h-screen origin-center"
           style={{
             y: translateY,
             clipPath: clipPath,
           }}
         >
-          <div className='w-full h-screen'>
+          <div className="h-screen w-full">
             <Canvas
-              className='bg-spider-red-500'
+              className="bg-spider-red-500"
               camera={{
                 position: [0, 2.8, -5],
                 rotation: [0, 3.15, 0],
@@ -67,26 +65,22 @@ export default function TitleSection() {
               }}
             >
               <>
-                <directionalLight
-                  position={[0, 1.5, -10]}
-                  intensity={0.5}
-                />
+                <directionalLight position={[0, 1.5, -10]} intensity={0.5} />
                 <ambientLight intensity={5} />
                 <group position={[0.05, 3, 0]}>
                   <Center>
                     <SpiderLogo />
                   </Center>
                 </group>
-                <ContactShadows
-                  scale={20}
-                  blur={0.5}
-                />
+                <ContactShadows scale={20} blur={0.5} />
               </>
             </Canvas>
           </div>
         </motion.section>
       </section>
-      <section className='w-full h-screen bg-spider-red-500'></section>
+      <section className="h-screen w-full bg-spider-red-500 p-8">
+        <Cards />
+      </section>
     </>
   );
 }
