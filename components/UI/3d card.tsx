@@ -66,7 +66,13 @@ export default function ThreeDCard({ images }: props) {
           variants={logoVariants}
           className="w-3/4 object-contain pb-6"
         >
-          <Image src={images.logo.src} alt="logo" width={200} height={200} />
+          <Image
+            src={images.logo.src}
+            alt="logo"
+            width={200}
+            height={200}
+            className="w-full"
+          />
         </motion.div>
       </motion.div>
     </>
